@@ -28,10 +28,11 @@ public class SysRole {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<SysUser> users = new HashSet<>();;
+    private Set<SysUser> users = new HashSet<>();
+    ;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "sys_role_meun",joinColumns = @JoinColumn(name="role_id"),inverseJoinColumns = @JoinColumn(name="meun_id"))
+    @JoinTable(name = "sys_role_meun", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "meun_id"))
     private Set<SysMeun> meuns = new HashSet<>();
 
     public Integer getId() {

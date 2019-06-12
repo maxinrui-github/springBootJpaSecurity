@@ -19,12 +19,12 @@ public class SysRoleService {
     @Autowired
     private SysRoleRepository sysRoleRepository;
 
-    public SysRole save(SysRole sysRole){
-        return  this.sysRoleRepository.save(sysRole);
+    public SysRole save(SysRole sysRole) {
+        return this.sysRoleRepository.save(sysRole);
     }
 
-    public SysRole getOne(Integer id){
-        return  this.sysRoleRepository.getOne(id);
+    public SysRole getOne(Integer id) {
+        return this.sysRoleRepository.getOne(id);
     }
 
 }

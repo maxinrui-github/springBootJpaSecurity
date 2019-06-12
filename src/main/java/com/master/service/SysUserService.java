@@ -20,13 +20,13 @@ public class SysUserService {
     @Autowired
     private SysUserRepository sysUserRepository;
 
-    public SysUser save(SysUser sysUser){
+    public SysUser save(SysUser sysUser) {
         sysUser.setPassword(MD5Util.encode(sysUser.getPassword()));
-        return  this.sysUserRepository.save(sysUser);
+        return this.sysUserRepository.save(sysUser);
     }
 
-    public SysUser getByName(String name){
-        return  this.sysUserRepository.findUsersByName(name);
+    public SysUser getByName(String name) {
+        return this.sysUserRepository.findUsersByName(name);
     }
 
 }

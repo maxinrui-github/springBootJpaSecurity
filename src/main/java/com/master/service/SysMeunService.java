@@ -31,8 +31,7 @@ public class SysMeunService {
 
     public Set<SysMeun> getMeuns() {
         Set<SysMeun> meuns = new HashSet();
-        SysUser user = getUserDetails();
-        Set<SysRole> roles = user.getRoles();
+        Set<SysRole> roles = getUserDetails().getRoles();
         for (SysRole role : roles) {
             meuns.addAll(role.getMeun());
         }
@@ -41,9 +40,7 @@ public class SysMeunService {
 
     private SysUser getUserDetails() {
         //获取当前用户
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getPrincipal();
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         //查询当前用户
         SysUser user = this.sysUserService.getByName(userDetails.getUsername());
         return user;
