@@ -45,4 +45,8 @@ public class LoginController {
     public String showHome() {
         return "login";
     }
+    @RequestMapping("/blank")
+    public String showBlank(Model model) {
+        return "blank";
+    }
 }

@@ -6,6 +6,8 @@ import com.master.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * \* Created with IntelliJ IDEA.
  * \* User: Maxinrui
@@ -27,6 +29,10 @@ public class SysUserService {
 
     public SysUser getByName(String name) {
         return this.sysUserRepository.findUsersByName(name);
+    }
+
+    public SysUser getById(Integer id) {
+        return this.sysUserRepository.findById(id).get();
     }
 
 }
