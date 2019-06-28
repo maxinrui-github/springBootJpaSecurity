@@ -3,6 +3,7 @@ package com.master;
 import com.master.domain.SysMeun;
 import com.master.domain.SysRole;
 import com.master.domain.SysUser;
+import com.master.error.BusinessException;
 import com.master.repository.SysMeunRepository;
 import com.master.repository.SysRoleRepository;
 import com.master.service.SysUserService;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -29,6 +31,7 @@ public class ApplicationTests {
     private SysMeunRepository sysMeunRepository;
 
     @Test
+    @Transactional
     public void save() {
         SysUser user = new SysUser();
         user.setName("admin");
@@ -54,7 +57,11 @@ public class ApplicationTests {
         role.setMeun(meuns);
         this.sysMeunRepository.saveAll(meuns);
         this.sysRoleRepository.saveAll(roles);
-        this.sysUserService.save(user);
+        try {
+            this.sysUserService.save(user);
+        } catch (BusinessException e) {
+            e.printStackTrace();
+        }
     }
 
 }

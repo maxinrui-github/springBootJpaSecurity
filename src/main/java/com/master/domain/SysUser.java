@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.*;
 
 /**
@@ -25,6 +26,7 @@ public class SysUser {
     @Column(name = "id")
     private Integer id;
     @Column(name = "name")
+    @NotBlank(message = "用户名不能为空")
     private String name;
     @Column(name = "password")
     private String password;

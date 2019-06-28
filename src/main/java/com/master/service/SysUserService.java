@@ -1,8 +1,12 @@
 package com.master.service;
 
 import com.master.domain.SysUser;
+import com.master.error.BusinessException;
+import com.master.error.EmBusinessError;
 import com.master.repository.SysUserRepository;
 import com.master.util.MD5Util;
+import com.master.validator.ValidationResult;
+import com.master.validator.ValidatorImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +25,14 @@ import java.util.Optional;
 public class SysUserService {
     @Autowired
     private SysUserRepository sysUserRepository;
+    @Autowired
+    private ValidatorImpl validator;
 
-    public SysUser save(SysUser sysUser) {
+    public SysUser save(SysUser sysUser) throws BusinessException {
+        ValidationResult result = validator.validate(sysUser);
+        if (result.isHasErrors()){
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,result.getErrMsg());
+        }
         sysUser.setPassword(MD5Util.encode(sysUser.getPassword()));
         return this.sysUserRepository.save(sysUser);
     }

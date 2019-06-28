@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
  * \
  */
 @Controller
+@RequestMapping("user")
 public class SysUserController extends BaseController{
 
     @Autowired

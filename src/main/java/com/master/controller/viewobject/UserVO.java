@@ -1,6 +1,7 @@
 package com.master.controller.viewobject;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
 
 /**
  * \* Created with IntelliJ IDEA.
