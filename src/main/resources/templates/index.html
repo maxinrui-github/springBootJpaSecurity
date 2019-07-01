@@ -1,5 +1,5 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="common/head::head('MASTER')">
+<head th:replace="common/head::head('首页')">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 
@@ -10,27 +10,20 @@
             <div class="nav-close"><i class="fa fa-times-circle"></i>
             </div>
             <div class="sidebar-collapse">
-                   <h2>MASTER-M</h2>
-                <ul class="nav" id="side-menu"th:each="menu :${meuns}">
-                    <li th:if="${menu.parentId} eq '0'">
-                        <a th:href="@{#}">
-                            <i class="fa fa-home"></i>
-                            <span class="nav-label" th:text="${menu.name}"></span>
-                            <span class="fa arrow"></span>
+                   <h2>MASTER-M </h2>
+                <ul class="nav" id="side-menu">
+                    <li th:each="menu :${meuns}">
+                        <a th:href="@{#}" th:if="${menu.parentId}  == 0">
+                           <i th:class="${menu.icon}"></i>
+                           <span class="nav-label" th:text="${menu.name}"></span>
+                           <span class="fa arrow"></span>
                         </a>
-                        <ul class="nav nav-second-level" th:each="menusec :${meuns}">
-                            <div th:if="${menusec.parentId eq menu.id}">
-                                <li>
-
-                                <a class="J_menuItem" href="index_v1.html" data-index="0"}></a>
+                       <ul class="nav nav-second-level" th:each="menusec :${meuns}">
+                                <li th:if="${menusec.parentId} == ${menu.id}">
+                                     <a class="J_menuItem" th:href="@{${menusec.href}}" th:text="${menusec.name}"></a>
                                 </li>
-                            </div>
-
                         </ul>
-
                     </li>
-
-
                 </ul>
             </div>
         </nav>
@@ -62,14 +55,10 @@
                         </li>
                     </ul>
                 </div>
-                <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+                <a th:href="@{/logout}" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
             </div>
             <div class="row J_mainContent" id="content-main">
-                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="index_v1.html?v=4.0" frameborder="0" data-id="index_v1.html" seamless></iframe>
-            </div>
-            <div class="footer">
-                <div class="pull-right">&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's blog</a>
-                </div>
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" th:src="@{/welcome}" frameborder="0" data-id="@{/welcome}" seamless></iframe>
             </div>
         </div>
         <!--右侧部分结束-->

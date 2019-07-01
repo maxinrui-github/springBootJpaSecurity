@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * \
  */
 @Service
-public class SysRoleService {
+public class SysRoleService extends BaseService{
     @Autowired
     private SysRoleRepository sysRoleRepository;
 

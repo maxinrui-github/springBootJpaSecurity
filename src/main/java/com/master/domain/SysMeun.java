@@ -17,20 +17,23 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "sys_meun")
-public class SysMeun {
+public class SysMeun implements Comparable<SysMeun> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "parent_id")
-    private String parentId;
-    @Column(name = "name")
+    @Column(name = "PARENT_ID")
+    private Integer parentId;
+    @Column(name = "NAME")
     private String name;
-    @Column(name = "href")
+    @Column(name = "HREF")
     private String href;
-    @Column(name = "sort")
+    @Column(name = "SORT")
     private Integer sort;
-
+    @Column(name = "ICON")
+    private String icon;
+    @Column(name = "IS_FIRST")
+    private String isFirst;
     @ManyToMany(mappedBy = "meuns")
     private Set<SysRole> roles = new HashSet<>();
 
@@ -42,12 +45,28 @@ public class SysMeun {
         this.id = id;
     }
 
-    public String getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(String parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getIsFirst() {
+        return isFirst;
+    }
+
+    public void setIsFirst(String isFirst) {
+        this.isFirst = isFirst;
     }
 
     public String getName() {
@@ -80,5 +99,11 @@ public class SysMeun {
 
     public void setRoles(Set<SysRole> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public int compareTo(SysMeun o) {
+
+        return this.sort.compareTo(o.sort);
     }
 }

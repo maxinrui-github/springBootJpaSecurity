@@ -22,9 +22,9 @@ import java.util.Set;
 public class SysRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String name;
 
     @ManyToMany(mappedBy = "roles")
@@ -32,7 +32,7 @@ public class SysRole {
     ;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "sys_role_meun", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "meun_id"))
+    @JoinTable(name = "sys_role_meun", joinColumns = @JoinColumn(name = "ROLE_ID"), inverseJoinColumns = @JoinColumn(name = "MEUN_ID"))
     private Set<SysMeun> meuns = new HashSet<>();
 
     public Integer getId() {

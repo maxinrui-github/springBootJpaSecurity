@@ -22,7 +22,7 @@ import java.util.Optional;
  * \
  */
 @Service
-public class SysUserService {
+public class SysUserService extends BaseService{
     @Autowired
     private SysUserRepository sysUserRepository;
     @Autowired

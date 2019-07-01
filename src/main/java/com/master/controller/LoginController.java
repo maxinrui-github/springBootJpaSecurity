@@ -47,7 +47,11 @@ public class LoginController {
     }
 
     @RequestMapping("blank")
-    public String showBlank(Model model) {
+    public String showBlank() {
         return "blank";
+    }
+    @RequestMapping("welcome")
+    public String showWelcome() {
+        return "welcome";
     }
 }
