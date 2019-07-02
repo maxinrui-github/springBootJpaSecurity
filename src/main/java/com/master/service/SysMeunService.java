@@ -11,10 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * \* Created with IntelliJ IDEA.
@@ -26,15 +23,18 @@ import java.util.TreeSet;
  * \
  */
 @Service
-public class SysMeunService extends BaseService{
+public class SysMeunService extends BaseService {
     @Autowired
     private SysUserService sysUserService;
 
-    public Set<SysMeun> getMeuns() {
+    public Map getMeuns() {
         Set<SysMeun> meuns = new TreeSet<>();
         getCurrentUser().getRoles().forEach(role -> {
             meuns.addAll(role.getMeun());
         });
-        return meuns;
+        Map result = new HashMap();
+        result.put("meuns", meuns);
+        result.put("user", getCurrentUser());
+        return result;
     }
 }

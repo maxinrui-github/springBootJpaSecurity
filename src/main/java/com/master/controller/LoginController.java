@@ -37,7 +37,7 @@ public class LoginController {
 
     @RequestMapping("/")
     public String showIndex(Model model) {
-        model.addAttribute("meuns", this.sysMeunService.getMeuns());
+        model.addAttribute("vo",this.sysMeunService.getMeuns());
         return "index";
     }
 

@@ -16,7 +16,10 @@ public class UserVO {
 
     private Integer id;
     private String name;
-    private String password;
+    private String cnName;
+    private Integer sex;
+    private String telphone;
+    private String email;
 
     public Integer getId() {
         return id;
@@ -34,11 +37,35 @@ public class UserVO {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getCnName() {
+        return cnName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCnName(String cnName) {
+        this.cnName = cnName;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getTelphone() {
+        return telphone;
+    }
+
+    public void setTelphone(String telphone) {
+        this.telphone = telphone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
