@@ -146,7 +146,7 @@ $(function(){
                 });
             })
     }
-     $_loalMeunTreeDom();
+   $_loalMeunTreeDom();
  //提交修改表单信息
 $('#updateBtn').click(function() {
     $.ajax({
@@ -154,7 +154,6 @@ $('#updateBtn').click(function() {
         url:"/sysmeun/update",
         dataType: "json",
         timeout:10000,
-        async:false,
         data:$('#updateForm').serialize(),
         success:function(data){
            hintResultMessage(data);
@@ -162,7 +161,7 @@ $('#updateBtn').click(function() {
       },error:function() {
         }
       })
-      return false;
+     return false;
   });
    //提交增加表单信息
 $('#addBtn').click(function() {
@@ -170,7 +169,6 @@ $('#addBtn').click(function() {
           type:"POST",
           url:"/sysmeun/save",
           dataType: "json",
-          async:false,
           data:$('#addForm').serialize(),
           success:function(data){
              hintResultMessage(data);
