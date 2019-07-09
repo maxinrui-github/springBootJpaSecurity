@@ -64,26 +64,22 @@ public class SysMeunService extends BaseService {
     }
 
     public List<MeunTreeNode> getMeunTree() {
-
         List<SysMeun> meuns = this.sysMeunRepository.findAll();
         List<MeunTreeNode> treeNodes = new ArrayList<>();
-        if (meuns.size() > 0 && meuns != null) {
-            List<MeunTreeNode> nodeList = null;
-            for (int i = 0; i < meuns.size(); i++) {
-                if (meuns.get(i).getParentId() == 0) {
-                    MeunTreeNode node = new MeunTreeNode(meuns.get(i).getId(), meuns.get(i).getName(), meuns.get(i).getParentId(), meuns.get(i).getHref(), meuns.get(i).getSort(), meuns.get(i).getIcon());
-                    nodeList = new ArrayList<>();
-                    treeNodes.add(node);
-                    for (int j = 0; j < meuns.size(); j++) {
-                        if (meuns.get(j).getParentId() == meuns.get(i).getId()) {
-                            MeunTreeNode temp = new MeunTreeNode(meuns.get(j).getId(), meuns.get(j).getName(), meuns.get(j).getParentId(), meuns.get(j).getHref(), meuns.get(j).getSort(), meuns.get(j).getIcon());
-                            nodeList.add(temp);
-                        }
+        List<MeunTreeNode> nodeList = null;
+        for (SysMeun meun : meuns) {
+            if (meun.getParentId() == 0) {
+                MeunTreeNode node = new MeunTreeNode(meun.getId(), meun.getName(), meun.getParentId(), meun.getHref(), meun.getSort(), meun.getIcon());
+                treeNodes.add(node);
+                nodeList = new ArrayList<>();
+                for (SysMeun meunsec : meuns) {
+                    if (meunsec.getParentId() == meun.getId()) {
+                        MeunTreeNode temp = new MeunTreeNode(meunsec.getId(), meunsec.getName(), meunsec.getParentId(), meunsec.getHref(), meunsec.getSort(), meunsec.getIcon());
+                        nodeList.add(temp);
                     }
                     node.setNodes(nodeList);
                 }
             }
-
         }
         return treeNodes;
     }
