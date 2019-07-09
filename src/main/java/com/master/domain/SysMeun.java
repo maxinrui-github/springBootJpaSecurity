@@ -32,8 +32,6 @@ public class SysMeun implements Comparable<SysMeun> {
     private Integer sort;
     @Column(name = "ICON")
     private String icon;
-    @Column(name = "IS_FIRST")
-    private String isFirst;
     @ManyToMany(mappedBy = "meuns")
     private Set<SysRole> roles = new HashSet<>();
 
@@ -59,14 +57,6 @@ public class SysMeun implements Comparable<SysMeun> {
 
     public void setIcon(String icon) {
         this.icon = icon;
-    }
-
-    public String getIsFirst() {
-        return isFirst;
-    }
-
-    public void setIsFirst(String isFirst) {
-        this.isFirst = isFirst;
     }
 
     public String getName() {

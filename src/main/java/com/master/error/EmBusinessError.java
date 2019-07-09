@@ -4,6 +4,7 @@ public enum EmBusinessError implements CommonError {
     //通用错误码
     PARAMETER_VALIDATION_ERROR(10001, "参数不合法"),
     UNKNOWN_ERROR(10002,"未知错误"),
+    UPDATE_ERROR(10003,"更新错误"),
     //2000?用户相关信息错误码错误码
     USER_NOT_EXIST(20001, "用户不存在");
 

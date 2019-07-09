@@ -7,12 +7,18 @@
 <meta name="renderer" content="webkit">
 <meta name="keywords" content="">
 <meta name="description" content="">
+<style>
+    .btn-right{
+        text-align: right;
+    }
+</style>
 
 <link threl="shortcut icon" th:href="@{favicon.ico}">
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
 <link th:href="@{/css/animate.css}" rel="stylesheet">
 <link th:href="@{/css/style.css}" rel="stylesheet">
+<link th:href="@{/css/plugins/chosen/chosen.css}" rel="stylesheet">
 
 
 <script th:src="@{/js/jquery.min.js}"  type="text/javascript"></script>
@@ -28,15 +34,36 @@
 
 
 
-    <!-- Peity -->
-    <script th:src="@{/js/plugins/peity/jquery.peity.min.js}"></script>
+<!-- Peity -->
+<script th:src="@{/js/plugins/peity/jquery.peity.min.js}"></script>
 
-    <!-- 自定义js -->
-    <script th:src="@{/js/content.js}"></script>
+<!-- 自定义js -->
+<script th:src="@{/js/content.js}"></script>
 
 
-    <!-- Rickshaw -->
-    <script th:src="@{/js/plugins/rickshaw/vendor/d3.v3.js}"></script>
-    <script th:src="@{/js/plugins/rickshaw/rickshaw.min.js}"></script>
+<!-- Rickshaw -->
+<script th:src="@{/js/plugins/rickshaw/vendor/d3.v3.js}"></script>
+<script th:src="@{/js/plugins/rickshaw/rickshaw.min.js}"></script>
+<script th:src="@{/js/plugins/treeview/bootstrap-treeview.js}"></script>
+<script th:src="@{/js/plugins/chosen/chosen.jquery.js}"></script>
+<script th:inline="text">
+        $(function () {
+            var items = $(".menu-item");
+            for (var i = 0; i < items.length; i++) {
+                var item = $(items[i]);
+                console.log(item);
+                var itemText = $(item.find("a")).text();
+
+                if (itemText == $("name").text()) {
+                    item.addClass("active");
+                } else {
+                    item.removeClass("active");
+                }
+            }
+
+        });
+
+    </script>
+ <script th:src="@{/js/common/resultMessage.js}"></script>
 </head>
 </html>

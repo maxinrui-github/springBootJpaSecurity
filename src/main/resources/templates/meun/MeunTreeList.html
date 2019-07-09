@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="common/head::head('MASTER')">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <div class="h4">菜单管理</div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div id="menu-info">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="data-panel">
+                <form class="m-t" role="form"  id="updateForm">
+                    <div class="row">
+                		<div class="form-group col-sm-12">
+                                <label class="col-sm-4 control-label btn-right">父级菜单：</label>
+                                <div class="col-sm-8 control-label">
+                                <select id="parentId"  name="parentId" class="form-control chosen"data-placeholder="请选择...">
+                                  <option></option>
+                                  <option value="0">一级菜单</option>
+                                </select>
+                                </div>
+                		</div>
+                	</div>
+                	<div class="row">
+                        <div class="form-group col-sm-12">
+                              <label class="col-sm-4 control-label btn-right">菜单名称：</label>
+                              <div class="col-sm-8 control-label">
+                                   <input id="id" name="id" type="hidden"/>
+                                  <input id="name" name="name" htmlEscape="false" maxlength="100" class="form-control" required/>
+                              </div>
+                      </div>
+                     </div>
+                     <div class="row">
+                         <div class="form-group col-sm-12">
+                               <label class="col-sm-4 control-label btn-right">链接地址：</label>
+                               <div class="col-sm-8 control-label" style="text-align: left;">
+                                   <input id="href" name="href" htmlEscape="false" maxlength="100" class="form-control"/>
+                               </div>
+                       </div>
+                      </div>
+                      <div class="row">
+                         <div class="form-group col-sm-12">
+                               <label class="col-sm-4 control-label btn-right">菜单排序：</label>
+                               <div class="col-sm-8 control-label">
+                                   <input id="sort" name="sort" htmlEscape="false" maxlength="100" class="form-control" required/>
+                               </div>
+                       </div>
+                      </div>
+                      <div class="row">
+                         <div class="form-group col-sm-12">
+                               <label class="col-sm-4 control-label btn-right">菜单图标：</label>
+                               <div class="col-sm-8 control-label">
+                                   <input id="icon" name="icon" htmlEscape="false" maxlength="100" class="form-control"/>
+                               </div>
+                       </div>
+                      </div>
+                    <button type="botton" class="btn btn-outline btn-success block full-width m-b" id="updateBtn">修改</button>
+                </form>
+            </div>
+        </div>
+         <div class="col-md-4">
+            <div id="menu-add">
+                <form class="m-t" role="form" id="addForm">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                                <label class="col-sm-4 control-label btn-right">父级菜单：</label>
+                                <div class="col-sm-8 control-label">
+                                <select id="parentIdAdd"  name="parentId" class="form-control chosen"data-placeholder="请选择...">
+                                  <option></option>
+                                  <option value="0">一级菜单</option>
+                                </select>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                              <label class="col-sm-4 control-label btn-right">菜单名称：</label>
+                              <div class="col-sm-8 control-label">
+                                  <input id="name" name="name" htmlEscape="false" maxlength="100" class="form-control required"/>
+                              </div>
+                      </div>
+                     </div>
+                     <div class="row">
+                         <div class="form-group col-sm-12">
+                               <label class="col-sm-4 control-label btn-right">链接地址：</label>
+                               <div class="col-sm-8 control-label" style="text-align: left;">
+                                   <input id="href" name="href" htmlEscape="false" maxlength="100" class="form-control"/>
+                               </div>
+                       </div>
+                      </div>
+                      <div class="row">
+                         <div class="form-group col-sm-12">
+                               <label class="col-sm-4 control-label btn-right">菜单排序：</label>
+                               <div class="col-sm-8 control-label">
+                                   <input id="sort" name="sort" htmlEscape="false" maxlength="100" class="form-control required"/>
+                               </div>
+                       </div>
+                      </div>
+                      <div class="row">
+                         <div class="form-group col-sm-12">
+                               <label class="col-sm-4 control-label btn-right">菜单图标：</label>
+                               <div class="col-sm-8 control-label">
+                                   <input id="icon" name="icon" htmlEscape="false" maxlength="100" class="form-control"/>
+                               </div>
+                       </div>
+                      </div>
+                    <button type="button" class="btn btn-outline btn-success block full-width m-b" id="addBtn">添加</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script th:inline="text">
+$(function(){
+ $('.chosen').chosen();
+//加载树形菜单
+    var $_loalMeunTreeDom = function(){
+        $.get("[[@{/sysmeun/getMeunTree}]]", function (data) {
+                for (var index in data.data){
+                    $('#parentId').append("<option value='"+data.data[index].id+"'>"+data.data[index].text+"<option>").trigger("chosen:updated");
+                    $('#parentIdAdd').append("<option value='"+data.data[index].id+"'>"+data.data[index].text+"<option>").trigger("chosen:updated");
+                }
+                $("#menu-info").treeview({
+                    data: data.data,// 赋值
+                    highlightSelected: true,// 选中项不高亮，避免和上述制定的颜色变化规则冲突
+                    multiSelect: false,// 不允许多选，因为我们要通过check框来控制
+                    showCheckbox: false,// 展示checkbox
+                    highlightSearchResults: true, // 高亮查询结果
+                    levels: 10, // 展开级别 Default: 2
+                    onNodeSelected: function (event, data) {
+                        $('#id').val(data.id);
+                        $('#parentId').val(data.parentId).trigger("chosen:updated");
+                        $('#name').val(data.text);
+                        $('#href').val(data.href);
+                        $('#sort').val(data.sort);
+                        $('#icon').val(data.icon);
+                    }
+                });
+            })
+    }
+     $_loalMeunTreeDom();
+ //提交修改表单信息
+$('#updateBtn').click(function() {
+    $.ajax({
+        type:"POST",
+        url:"/sysmeun/update",
+        dataType: "json",
+        timeout:10000,
+        async:false,
+        data:$('#updateForm').serialize(),
+        success:function(data){
+           hintResultMessage(data);
+           $_loalMeunTreeDom();
+      },error:function() {
+        }
+      })
+      return false;
+  });
+   //提交增加表单信息
+$('#addBtn').click(function() {
+      $.ajax({
+          type:"POST",
+          url:"/sysmeun/save",
+          dataType: "json",
+          async:false,
+          data:$('#addForm').serialize(),
+          success:function(data){
+             hintResultMessage(data);
+             $_loalMeunTreeDom();
+        },error:function() {
+          }
+        })
+        return false;
+    });
+});
+</script>
+</html>
