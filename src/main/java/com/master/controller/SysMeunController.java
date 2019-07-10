@@ -31,14 +31,10 @@ public class SysMeunController extends BaseService {
     public CommonReturnType simpleTree() {
         return CommonReturnType.create(sysMeunService.getMeunTree());
     }
-    @RequestMapping("update")
+
+    @RequestMapping("saveOrUpdate")
     @ResponseBody
-    public CommonReturnType update(SysMeun meun) throws BusinessException {
-        return CommonReturnType.create(this.sysMeunService.update(meun));
-    }
-    @RequestMapping("save")
-    @ResponseBody
-    public CommonReturnType save(SysMeun meun) throws BusinessException {
-        return CommonReturnType.create(this.sysMeunService.save(meun));
+    public CommonReturnType saveOrUpdate(SysMeun meun) throws BusinessException {
+        return CommonReturnType.create(this.sysMeunService.saveOrUpdate(meun));
     }
 }

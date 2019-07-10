@@ -42,24 +42,11 @@ public class SysMeunService extends BaseService {
         return result;
     }
 
-    public int update(SysMeun meun) throws BusinessException {
+    public SysMeun saveOrUpdate(SysMeun meun) throws BusinessException {
         ValidationResult result = validator.validate(meun);
         if (result.isHasErrors()) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, result.getErrMsg());
         }
-        int updateResult = this.sysMeunRepository.updateById(meun);
-        if (updateResult < 1) {
-            throw new BusinessException(EmBusinessError.UPDATE_ERROR, result.getErrMsg());
-        }
-        return updateResult;
-    }
-
-    public SysMeun save(SysMeun meun) throws BusinessException {
-        ValidationResult result = validator.validate(meun);
-        if (result.isHasErrors()) {
-            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, result.getErrMsg());
-        }
-        int updateResult = this.sysMeunRepository.updateById(meun);
         return this.sysMeunRepository.save(meun);
     }
 

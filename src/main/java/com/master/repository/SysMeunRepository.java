@@ -20,15 +20,4 @@ import java.util.List;
  */
 public interface SysMeunRepository extends JpaRepository<SysMeun, Integer> {
 
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE sys_meun m SET " +
-                    "m.name =:#{#meun.name}," +
-                    "m.href =:#{#meun.href}," +
-                    "m.parent_id =:#{#meun.parentId}," +
-                    "m.sort =:#{#meun.sort}," +
-                    "m.icon =:#{#meun.icon}" +
-                    " WHERE m.id=:#{#meun.id}",nativeQuery = true)
-    int updateById(@Param("meun") SysMeun meun);
-
 }
