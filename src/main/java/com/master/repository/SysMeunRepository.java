@@ -20,4 +20,15 @@ import java.util.List;
  */
 public interface SysMeunRepository extends JpaRepository<SysMeun, Integer> {
 
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE sys_meun m SET " +
+                    "m.name =CASE WHEN :#{#meun.name} IS NULL THEN m.name ELSE :#{#meun.name} END ," +
+                    "m.href =CASE WHEN :#{#meun.href} IS NULL THEN m.href ELSE :#{#meun.href} END ," +
+                    "m.parent_id =CASE WHEN :#{#meun.parentId} IS NULL THEN m.parent_id ELSE :#{#meun.parentId} END ," +
+                    "m.sort =CASE WHEN :#{#meun.sort} IS NULL THEN m.sort ELSE :#{#meun.sort} END ," +
+                    "m.icon =CASE WHEN :#{#meun.icon} IS NULL THEN  m.icon ELSE :#{#meun.icon} END " +
+                    " WHERE m.id=:#{#meun.id}",nativeQuery = true)
+    int updateById(@Param("meun") SysMeun meun);
+
 }

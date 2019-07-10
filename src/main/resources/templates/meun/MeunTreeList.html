@@ -151,7 +151,7 @@ $(function(){
 $('#updateBtn').click(function() {
     $.ajax({
         type:"POST",
-        url:"/sysmeun/saveOrUpdate",
+        url:"/sysmeun/update",
         dataType: "json",
         timeout:10000,
         data:$('#updateForm').serialize(),
@@ -167,7 +167,7 @@ $('#updateBtn').click(function() {
 $('#addBtn').click(function() {
       $.ajax({
           type:"POST",
-          url:"/sysmeun/saveOrUpdate",
+          url:"/sysmeun/save",
           dataType: "json",
           data:$('#addForm').serialize(),
           success:function(data){
